@@ -1,8 +1,6 @@
 import React from "react";
 import { HOST, PORT, PROTO, IMAGES_PATH } from "../constants/constants.js";
 import axios from 'axios';
-import { FILENAMES } from "../constants/constants.js";
-import Dashboard from "../socket/client.js"
 
 // define the data in the Presentation Component so that we update state once
 
@@ -63,7 +61,6 @@ class ImagesList extends React.Component {
     }
 
     submitImages(event) {
-        var ctx = event.target;
         axios.post(PROTO + "://" + HOST + ":" + PORT + "/backend/drift/1000/10/face_aging", {
             "filenames": this.state.filenames
         })
@@ -132,7 +129,7 @@ class ImagesList extends React.Component {
         }
         if(this.state.imageState) {
             images = this.state.imageState.map((value, key) => {
-                var inputKey = "checkbox" + "[" + key.toString() + "]";
+                var inputKey = "checkbox".concat("[", key.toString(), "]");
                 keys.push(key);
                 return (
                     <div className="image-box image-grid-item" key={key}>

@@ -6,7 +6,6 @@ import io from "socket.io-client"
 const thisSessionId = Math.random().toString(36).substr(2, 9);
 
 function Dashboard(props) {
-  const elem = props.elem;
   const [uploadProgress, setUploadProgress] = useState({percentage: 0})
 
   useEffect(() => {

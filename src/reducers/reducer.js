@@ -10,11 +10,9 @@ const imageState = (state = ImagesList.stateData, action) => {
         case SELECT_S3_ITEM:
             var stateDict = action.evaluate(action.item.name); // stateDict
             return stateDict;
-            break;
 
         default:
             return {};
-            break;
     }
 };
 
