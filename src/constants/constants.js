@@ -11,6 +11,5 @@ module.exports = {
     PROTO,
     HOST,
     PORT,
-    IMAGES_PATH, 
-    FILENAMES
+    IMAGES_PATH
 };
