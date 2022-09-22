@@ -2,6 +2,9 @@ import React from "react";
 import { HOST, PORT, PROTO, IMAGES_PATH } from "../constants/constants.js";
 import axios from 'axios';
 
+axios.defaults.headers["Access-Control-Allow-Origin"] = "*";
+axios.defaults.headers["Access-Control-Allow-Methods"] = "*";
+
 // define the data in the Presentation Component so that we update state once
 
 class ImagesList extends React.Component {
