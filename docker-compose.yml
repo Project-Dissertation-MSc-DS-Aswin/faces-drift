@@ -1,0 +1,20 @@
+version: '3'
+services:
+  faces_drift:
+    build: .
+    container_name: faces_drift
+    tty: true
+    ports:
+      - "80:80"
+    volumes:
+      - .:/home/project
+    networks:
+      static-network:
+        ipv4_address: 172.1.0.6
+networks:
+  static-network:
+    ipam:
+      config:
+        - subnet: 172.1.0.0/16
+          #docker-compose v3+ do not use ip_range
+          # ip_range: 192.168.0.1/24
