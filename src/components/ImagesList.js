@@ -16,6 +16,7 @@ class ImagesList extends React.Component {
         url: "",
         score_test: '0.00',
         score_validation: '0.00',
+        plot: 'plot.png',
         filenames: []
     }
     
@@ -72,6 +73,7 @@ class ImagesList extends React.Component {
             var results = response.data['predictions'];
             var score_test = response.data['score_test'];
             var score_validation = response.data['score_validation'];
+            var plot = IMAGES_PATH + response.data["plot"];
 
             if (ImagesList.stateData.length > 0) {
                 for (var state in ImagesList.stateData) {
@@ -99,7 +101,8 @@ class ImagesList extends React.Component {
                 this.setState({
                     imageState: ImagesList.stateData, 
                     score_test: score_test, 
-                    score_validation: score_validation
+                    score_validation: score_validation,
+                    plot: plot
                 });
                 console.log(score_test, score_validation);
                 document.body.style.cursor = "default";
@@ -122,6 +125,15 @@ class ImagesList extends React.Component {
             }
         }
         return true;
+    }
+    
+    clickButton(event) {
+        var ProgressBar = require('progressbar.js');
+        // Assuming we have an empty <div id="container"></div> in
+        // HTML
+        var bar = new ProgressBar.Line('#container', {easing: 'easeInOut', duration: 45000});
+        this.submitImages(event);
+        bar.animate(1);
     }
 
     render() {
@@ -161,7 +173,7 @@ class ImagesList extends React.Component {
                     <label>Select All <input type="checkbox" name="Select_all" value="1" onClick={() => this.selectAllCheckBoxes(keys)} /></label>
                 </div>
                 <div className="row">
-                    <button onClick={(event) => this.submitImages(event)}>Submit Image(s)</button>
+                    <button onClick={(event) => this.clickButton(event)}>Submit Image(s)</button>
                 </div>
                 <div className="row image-grid">
                     { images }
@@ -171,6 +183,9 @@ class ImagesList extends React.Component {
                 </div>
                 <div className="row">
                     Score Validation (Accuracy): <em className="text-color-blue">{ this.state.score_validation }</em>
+                </div>
+                <div className="row">
+                    <img src={this.state.plot} alt="plot" title="plot" />
                 </div>
                 <div className="row">
                     <button onClick={(event) => this.submitImages(event)}>Submit Image(s)</button>
